@@ -98,6 +98,23 @@
 		</div> <!-- hiddenpanels -->
 			
 			<div class="panel-container">
+
+		<div id="year2013">  
+  
+  		<div id="map_canvas7" style="width:556px; height:450px"></div>
+  	
+  			<div class="moreinfo">
+			<ul>
+				<li><a href="https://www.google.com/fusiontables/DataSource?docid=1OsN1K0wZRSZA1qVUgQRKeMRJIcFjNUYzX5q8dk0C">Ouvrir le tableur</a></li>
+				<li><a href="#" class="triggerembed">Incorporer</a></li>
+				<li><a href="#" class="trigger">Légende</a></li>
+			</ul>
+			<br style="clear:both"/>
+			
+			</div> <!-- more info -->
+  		
+  		</div><!-- year2013 -->				
+
  
  		<div id="year2012">  
   
@@ -195,7 +212,7 @@
 		</div><!-- panel container -->
 
 	<ul class="etabs">
-  		<li class="tab"><a href="#year2012">2012</a></li><li class="tab"><a href="#year2011">2011</a></li><li class="tab"><a href="#year2010">2010</a></li><li class="tab"><a href="#year2009">2009</a></li><li class="tab"><a href="#year2008">2008</a></li><li class="tab"><a href="#year2007">2007</a></li>
+  		<li class="tab"><a href="#year2013">2013</a><li class="tab"><a href="#year2012">2012</a></li><li class="tab"><a href="#year2011">2011</a></li><li class="tab"><a href="#year2010">2010</a></li><li class="tab"><a href="#year2009">2009</a></li><li class="tab"><a href="#year2008">2008</a></li><li class="tab"><a href="#year2007">2007</a></li>
 	</ul>		
 			
 
@@ -271,10 +288,15 @@
                                    myOptions); 
         
 
-         // Set up the fifth map
+         // Set up the sixth map
         
         var map6 = new google.maps.Map(document.getElementById("map_canvas6"),
-                                   myOptions);                            
+                                   myOptions);
+
+        // Set up the seventh map
+        
+        var map7 = new google.maps.Map(document.getElementById("map_canvas7"),
+                                   myOptions);                              
         
     	// Customise how it looks
         
@@ -336,6 +358,7 @@
 	map4.setOptions({styles: amnestyStyles});
 	map5.setOptions({styles: amnestyStyles});
 	map6.setOptions({styles: amnestyStyles});
+	map7.setOptions({styles: amnestyStyles});
 
 // Add the fusion layer to map 1
 
@@ -382,6 +405,22 @@
 		}); 
 
 	layer6.setMap(map6);     
+
+
+	// Add the fusion layer to map 7 - new way of doing things with the encrypted tableID
+
+	var fusionTableId2013 = '1OsN1K0wZRSZA1qVUgQRKeMRJIcFjNUYzX5q8dk0C';
+
+	var layer7 = new google.maps.FusionTablesLayer({ 
+		  query: { 
+		    from: fusionTableId2013 
+		  }, 
+		  styleId: 2,
+		  templateId: 2 
+
+		}); 
+
+	layer7.setMap(map7);    
         
     
     // Stuff to overcome the fact Google Maps doesn't like being loaded into a none;
@@ -497,6 +536,25 @@
              	google.maps.event.trigger(map6, 'resize');
         		map6.setCenter(latlng);
              googleMapsInit6 = true;        
+     }
+     
+
+    });
+});	
+
+	  var googleMapsInit7 = false;
+	
+	$(document).ready(function(){
+  
+ 	 $('#tab-container')
+    .easytabs()
+    .bind('easytabs:after', function(evt, tab, panel) {
+     
+     if ( panel.is('#year2013') && !googleMapsInit7) {
+    			
+             	google.maps.event.trigger(map7, 'resize');
+        		map7.setCenter(latlng);
+             googleMapsInit7 = true;        
      }
      
 
